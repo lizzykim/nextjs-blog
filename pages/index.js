@@ -2,6 +2,17 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
+import { getSortedPostsData } from '../lib/post';
+
+export async function getstaticProps() {
+  const allPostsData = getSortedPostsData;
+
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
 
 export default function Home() {
   return (
