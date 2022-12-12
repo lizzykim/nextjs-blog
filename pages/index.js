@@ -4,8 +4,8 @@ import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import { getSortedPostsData } from '../lib/post';
 
-export async function getstaticProps() {
-  const allPostsData = getSortedPostsData;
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
 
   return {
     props: {
@@ -14,7 +14,7 @@ export async function getstaticProps() {
   };
 }
 
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
@@ -28,6 +28,17 @@ export default function Home() {
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
+      </section>
+      <section>
+        <h2>Blog</h2>
+        {allPostsData.map(({ id, date, title }) => (
+          <ul>
+            <h1>{title}</h1>
+            {id}
+            <br />
+            {date}
+          </ul>
+        ))}
       </section>
     </Layout>
   );
